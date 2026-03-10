@@ -23,7 +23,7 @@ Follow these steps to set up the project locally:
 
 1. **Clone the Repository:**
     ```bash
-    git clone <YOUR_GITHUB_REPO_URL>
+    git clone https://github.com/VgcMalhara/Task-Manager.git
     cd task-manager
     ```
 
@@ -74,6 +74,3 @@ DB_DATABASE Database Name task_manager
 DB_USERNAME DB Username root
 DB_PASSWORD DB Password (Your local password)
 APP_URL Application URL http://127.0.0.1:8000
-🎥 Demo Video
-
-Click here to watch the walk-through video
