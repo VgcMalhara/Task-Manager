@@ -13,15 +13,12 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        // Login wela inna user ge tasks vitharak gannawa
         $query = Task::where('user_id', Auth::id());
 
-        // Status filter ekak thiyenawanam (pending/completed etc.)
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // Pagination: Page ekakata tasks 10 gane pennanna
         $tasks = $query->latest()->paginate(10)->withQueryString();
 
         return view('dashboard', compact('tasks'));
@@ -32,11 +29,11 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create'); // Create form ekata yana view eka
+        return view('tasks.create');
     }
 
     /**
-     * Store a newly created task in storage.
+     *
      */
     public function store(Request $request)
     {
@@ -46,7 +43,7 @@ class TaskController extends Controller
             'status' => 'required|in:pending,in-progress,completed',
         ]);
 
-        // User ID eka ekka task eka save kirima
+        //
         Task::create([
             'user_id' => Auth::id(),
             'title' => $validated['title'],
@@ -58,11 +55,11 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified task.
+     *
      */
     public function edit(Task $task)
     {
-        // Task eka aithi me user tatama kiyala check karanawa (Security)
+        //
         if ($task->user_id !== Auth::id()) {
             abort(403);
         }
@@ -71,7 +68,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the specified task in storage.
+     *
      */
     public function update(Request $request, Task $task)
     {
@@ -91,7 +88,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified task from storage (Soft Delete).
+     *
      */
     public function destroy(Task $task)
     {
@@ -99,7 +96,7 @@ class TaskController extends Controller
             abort(403);
         }
 
-        // Model eke 'use SoftDeletes' thiyena nisa meka auto soft delete wenawa
+        //
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully (Soft Deleted)!');

@@ -20,7 +20,7 @@
 
                     <form action="{{ route('tasks.update', $task) }}" method="POST">
                         @csrf
-                        @method('PUT') {{-- MEKA ANIWARYAYI - Laravel wala update walata PUT method eka ona --}}
+                        @method('PUT')
 
                         <div class="mb-6">
                             <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">Title <span class="text-red-500">*</span></label>
